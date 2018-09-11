@@ -18,8 +18,6 @@
 #ifndef QGSSERVERLOGGER_H
 #define QGSSERVERLOGGER_H
 
-#define SIP_NO_FILE
-
 
 #include "qgsmessagelog.h"
 
@@ -27,13 +25,14 @@
 #include <QObject>
 #include <QString>
 #include <QTextStream>
+#include "qgis_server.h"
 
 /**
  * \ingroup server
  * \brief Writes message log into server logfile
  * \since QGIS 2.8
  */
-class QgsServerLogger: public QgsMessageLogConsole
+class SERVER_EXPORT QgsServerLogger : public QgsMessageLogConsole
 {
     Q_OBJECT
   public:
@@ -77,6 +76,11 @@ class QgsServerLogger: public QgsMessageLogConsole
     QgsServerLogger();
 
   private:
+#ifdef SIP_RUN
+    QgsServerLogger( const QgsServerLogger & );
+    QgsServerLogger &operator=( const QgsServerLogger & );
+#endif
+
     static QgsServerLogger *sInstance;
 
     QFile mLogFile;
