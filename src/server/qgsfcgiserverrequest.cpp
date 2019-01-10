@@ -117,6 +117,14 @@ QgsFcgiServerRequest::QgsFcgiServerRequest()
   setUrl( url );
   setMethod( method );
 
+  // project
+  QString project = getenv( "QGIS_PROJECT_FILE" );
+  if ( ! project.isEmpty() )
+  {
+    setParameter( QStringLiteral( "MAP" ), project);
+  }
+
+
   // Output debug infos
   Qgis::MessageLevel logLevel = QgsServerLogger::instance()->logLevel();
   if ( logLevel <= Qgis::Info )
@@ -194,5 +202,9 @@ void QgsFcgiServerRequest::printRequestInfos()
     {
       QgsMessageLog::logMessage( envVar + QString( getenv( envVar.toStdString().c_str() ) ), QStringLiteral( "Server" ), Qgis::Info );
     }
+  }
+  if ( getenv( "QGIS_PROJECT_FILE" ) )
+  {
+    QgsMessageLog::logMessage( "QGIS_PROJECT_FILE: " + QString( getenv( "QGIS_PROJECT_FILE" ) ), QStringLiteral( "Server" ), Qgis::Info );
   }
 }
