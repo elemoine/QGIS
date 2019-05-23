@@ -632,14 +632,14 @@ namespace QgsWms
       /**
        * Returns TILED parameter or an empty string if not
        * defined.
-       * \since QGIS 3.8
+       * \since QGIS 3.10
        */
       QString tiled() const;
 
       /**
        * Returns TILED parameter as a boolean.
        * \throws QgsBadRequestException
-       * \since QGIS 3.8
+       * \since QGIS 3.10
        */
       bool tiledAsBool() const;
 

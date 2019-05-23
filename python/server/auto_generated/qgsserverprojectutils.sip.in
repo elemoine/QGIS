@@ -162,7 +162,7 @@ Returns the tiled buffer for WMS images defined in a QGIS project.
 
 :return: tiled buffer if defined in project, 0 otherwise.
 
-.. versionadded:: 3.8
+.. versionadded:: 3.10
 %End
 
   int wmsMaxAtlasFeatures( const QgsProject &project );

@@ -151,7 +151,7 @@ namespace QgsWms
       /**
        * Returns the tiled buffer value to use for rendering according to the
        * current configuration.
-       * \since QGIS 3.8
+       * \since QGIS 3.10
        */
       int tiledBufferValue() const;
 

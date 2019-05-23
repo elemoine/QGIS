@@ -151,7 +151,7 @@ namespace QgsServerProjectUtils
    * Returns the tiled buffer for WMS images defined in a QGIS project.
    * \param project the QGIS project
    * \returns tiled buffer if defined in project, 0 otherwise.
-   * \since QGIS 3.8
+   * \since QGIS 3.10
    */
   SERVER_EXPORT int wmsTiledValue( const QgsProject &project );
 
