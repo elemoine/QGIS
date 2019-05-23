@@ -24,7 +24,6 @@
 using namespace QgsWms;
 
 const double OGC_PX_M = 0.00028; // OGC reference pixel size in meter
-
 QgsWmsRenderContext::QgsWmsRenderContext( const QgsProject *project, QgsServerInterface *interface )
   : mProject( project )
   , mInterface( interface )
@@ -130,6 +129,17 @@ int QgsWmsRenderContext::imageQuality() const
   }
 
   return imageQuality;
+}
+
+int QgsWmsRenderContext::tiledBufferValue() const
+{
+  int tiledValue = 0;
+
+  if ( mParameters.tiledAsBool() )
+  {
+    tiledValue = QgsServerProjectUtils::wmsTiledValue( *mProject );
+  }
+  return tiledValue;
 }
 
 int QgsWmsRenderContext::precision() const
@@ -638,10 +648,10 @@ bool QgsWmsRenderContext::isValidWidthHeight() const
   return true;
 }
 
-QSize QgsWmsRenderContext::mapSize( const bool aspectRatio ) const
+QSize QgsWmsRenderContext::mapSize( const bool aspectRatio, const int tiledBufferValue ) const
 {
-  int width = mapWidth();
-  int height = mapHeight();
+  int width = mapWidth() + tiledBufferValue * 2;
+  int height = mapHeight() + tiledBufferValue * 2;
 
   // Adapt width / height if the aspect ratio does not correspond with the BBOX.
   // Required by WMS spec. 1.3.

@@ -754,7 +754,7 @@ namespace QgsWms
 
     // create the output image and the painter
     std::unique_ptr<QPainter> painter;
-    std::unique_ptr<QImage> image( createImage( mContext.mapSize() ) );
+    std::unique_ptr<QImage> image( createImage( mContext.mapSize( true, mContext.tiledBufferValue() ) ) );
 
     // configure map settings (background, DPI, ...)
     configureMapSettings( image.get(), mapSettings );

@@ -149,6 +149,13 @@ namespace QgsWms
       int imageQuality() const;
 
       /**
+       * Returns the tiled buffer value to use for rendering according to the
+       * current configuration.
+       * \since QGIS 3.8
+       */
+      int tiledBufferValue() const;
+
+      /**
        * Returns the precision to use according to the current configuration.
        */
       int precision() const;
@@ -202,10 +209,11 @@ namespace QgsWms
 
       /**
        * Returns the size (in pixels) of the map to render, according to width
-       * and height WMS parameters as well as the \a aspectRatio option.
+       * and height WMS parameters as well as the \a aspectRatio and \a
+       * tiledBufferValue options.
        * \since QGIS 3.8
        */
-      QSize mapSize( bool aspectRatio = true ) const;
+      QSize mapSize( bool aspectRatio = true, const int tiledBufferValue = 0 ) const;
 
       /**
        * Returns true if width and height are valid according to the maximum
