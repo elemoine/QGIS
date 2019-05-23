@@ -645,11 +645,7 @@ QgsProjectProperties::QgsProjectProperties( QgsMapCanvas *mapCanvas, QWidget *pa
   }
 
   // WMS tiledValue
-  int tiled = QgsProject::instance()->readNumEntry( QStringLiteral( "WMSTiledValue" ), QStringLiteral( "/" ), -1 );
-  if ( tiled != -1 )
-  {
-    mWMSTiledValueSpinBox->setValue( tiled );
-  }
+  mWMSTiledValueSpinBox->setValue( QgsProject::instance()->readNumEntry( QStringLiteral( "WMSTiledValue" ), QStringLiteral( "/" ), 0 ) );
 
   mWMSMaxAtlasFeaturesSpinBox->setValue( QgsProject::instance()->readNumEntry( QStringLiteral( "WMSMaxAtlasFeatures" ), QStringLiteral( "/" ), 1 ) );
 
@@ -1331,16 +1327,7 @@ void QgsProjectProperties::apply()
   }
 
   // WMS Tiled Value
-  int tiledValue = mWMSTiledValueSpinBox->value();
-  if ( tiledValue == 0 )
-  {
-    QgsProject::instance()->removeEntry( QStringLiteral( "WMSTiledValue" ), QStringLiteral( "/" ) );
-  }
-  else
-  {
-    QgsProject::instance()->writeEntry( QStringLiteral( "WMSTiledValue" ), QStringLiteral( "/" ), tiledValue );
-  }
-
+  QgsProject::instance()->writeEntry( QStringLiteral( "WMSTiledValue" ), QStringLiteral( "/" ), mWMSTiledValueSpinBox->value() );
 
   int maxAtlasFeatures = mWMSMaxAtlasFeaturesSpinBox->value();
   QgsProject::instance()->writeEntry( QStringLiteral( "WMSMaxAtlasFeatures" ), QStringLiteral( "/" ), maxAtlasFeatures );
