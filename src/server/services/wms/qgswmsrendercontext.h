@@ -47,7 +47,8 @@ namespace QgsWms
         AddQueryLayers         = 0x80,
         UseWfsLayersOnly       = 0x100,
         AddExternalLayers      = 0x200,
-        UseSrcWidthHeight      = 0x400
+        UseSrcWidthHeight      = 0x400,
+        UseTileBuffer          = 0x800
       };
       Q_DECLARE_FLAGS( Flags, Flag )
 
@@ -209,11 +210,10 @@ namespace QgsWms
 
       /**
        * Returns the size (in pixels) of the map to render, according to width
-       * and height WMS parameters as well as the \a aspectRatio and \a
-       * tiledBufferValue options.
+       * and height WMS parameters as well as the \a aspectRatio option.
        * \since QGIS 3.8
        */
-      QSize mapSize( bool aspectRatio = true, const int tiledBufferValue = 0 ) const;
+      QSize mapSize( bool aspectRatio = true ) const;
 
       /**
        * Returns true if width and height are valid according to the maximum

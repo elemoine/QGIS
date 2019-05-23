@@ -648,10 +648,11 @@ bool QgsWmsRenderContext::isValidWidthHeight() const
   return true;
 }
 
-QSize QgsWmsRenderContext::mapSize( const bool aspectRatio, const int tiledBufferValue ) const
+QSize QgsWmsRenderContext::mapSize( const bool aspectRatio ) const
 {
-  int width = mapWidth() + tiledBufferValue * 2;
-  int height = mapHeight() + tiledBufferValue * 2;
+  int tiledBuffer = mFlags & UseTileBuffer ? tiledBufferValue() : 0;
+  int width = mapWidth() + tiledBuffer * 2;
+  int height = mapHeight() + tiledBuffer * 2;
 
   // Adapt width / height if the aspect ratio does not correspond with the BBOX.
   // Required by WMS spec. 1.3.

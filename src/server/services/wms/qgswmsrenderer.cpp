@@ -17,7 +17,6 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #include "qgswmsutils.h"
 #include "qgsjsonutils.h"
 #include "qgswmsrenderer.h"
@@ -754,7 +753,7 @@ namespace QgsWms
 
     // create the output image and the painter
     std::unique_ptr<QPainter> painter;
-    std::unique_ptr<QImage> image( createImage( mContext.mapSize( true, mContext.tiledBufferValue() ) ) );
+    std::unique_ptr<QImage> image( createImage( mContext.mapSize() ) );
 
     // configure map settings (background, DPI, ...)
     configureMapSettings( image.get(), mapSettings );
@@ -770,6 +769,12 @@ namespace QgsWms
 
     // painting is terminated
     painter->end();
+
+    if ( mContext.testFlag( QgsWmsRenderContext::UseTileBuffer ) )
+    {
+      QRect rect( mContext.tiledBufferValue(), mContext.tiledBufferValue(), mContext.mapWidth(), mContext.mapHeight() );
+      image.reset( new QImage( image.get()->copy( rect ) ) );
+    }
 
     // scale output image if necessary (required by WMS spec)
     QImage *scaledImage = scaleImage( image.get() );
