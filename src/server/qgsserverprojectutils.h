@@ -148,12 +148,12 @@ namespace QgsServerProjectUtils
   SERVER_EXPORT int wmsImageQuality( const QgsProject &project );
 
   /**
-   * Returns the tiled buffer for WMS images defined in a QGIS project.
+   * Returns the tile buffer for WMS images defined in a QGIS project.
    * \param project the QGIS project
-   * \returns tiled buffer if defined in project, 0 otherwise.
+   * \returns tile buffer if defined in project, 0 otherwise.
    * \since QGIS 3.10
    */
-  SERVER_EXPORT int wmsTiledValue( const QgsProject &project );
+  SERVER_EXPORT int wmsTileBuffer( const QgsProject &project );
 
   /**
    * Returns the maximum number of atlas features which can be printed in a request

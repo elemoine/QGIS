@@ -111,9 +111,9 @@ int QgsServerProjectUtils::wmsImageQuality( const QgsProject &project )
   return project.readNumEntry( QStringLiteral( "WMSImageQuality" ), QStringLiteral( "/" ), -1 );
 }
 
-int QgsServerProjectUtils::wmsTiledValue( const QgsProject &project )
+int QgsServerProjectUtils::wmsTileBuffer( const QgsProject &project )
 {
-  return project.readNumEntry( QStringLiteral( "WMSTiledValue" ), QStringLiteral( "/" ), 0 );
+  return project.readNumEntry( QStringLiteral( "WMSTileBuffer" ), QStringLiteral( "/" ), 0 );
 }
 
 int QgsServerProjectUtils::wmsMaxAtlasFeatures( const QgsProject &project )

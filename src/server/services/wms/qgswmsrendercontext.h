@@ -150,11 +150,11 @@ namespace QgsWms
       int imageQuality() const;
 
       /**
-       * Returns the tiled buffer value to use for rendering according to the
+       * Returns the tile buffer value to use for rendering according to the
        * current configuration.
        * \since QGIS 3.10
        */
-      int tiledBufferValue() const;
+      int tileBuffer() const;
 
       /**
        * Returns the precision to use according to the current configuration.

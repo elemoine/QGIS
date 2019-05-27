@@ -131,15 +131,15 @@ int QgsWmsRenderContext::imageQuality() const
   return imageQuality;
 }
 
-int QgsWmsRenderContext::tiledBufferValue() const
+int QgsWmsRenderContext::tileBuffer() const
 {
-  int tiledValue = 0;
+  int tileBuffer = 0;
 
   if ( mParameters.tiledAsBool() )
   {
-    tiledValue = QgsServerProjectUtils::wmsTiledValue( *mProject );
+    tileBuffer = QgsServerProjectUtils::wmsTileBuffer( *mProject );
   }
-  return tiledValue;
+  return tileBuffer;
 }
 
 int QgsWmsRenderContext::precision() const
@@ -650,9 +650,9 @@ bool QgsWmsRenderContext::isValidWidthHeight() const
 
 QSize QgsWmsRenderContext::mapSize( const bool aspectRatio ) const
 {
-  int tiledBuffer = mFlags & UseTileBuffer ? tiledBufferValue() : 0;
-  int width = mapWidth() + tiledBuffer * 2;
-  int height = mapHeight() + tiledBuffer * 2;
+  int tBuffer = mFlags & UseTileBuffer ? tileBuffer() : 0;
+  int width = mapWidth() + tBuffer * 2;
+  int height = mapHeight() + tBuffer * 2;
 
   // Adapt width / height if the aspect ratio does not correspond with the BBOX.
   // Required by WMS spec. 1.3.

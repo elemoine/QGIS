@@ -2442,12 +2442,12 @@
                     <item>
                      <widget class="QLabel" name="label_33">
                       <property name="text">
-                       <string>Tiled value</string>
+                       <string>Tile buffer</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QSpinBox" name="mWMSTiledValueSpinBox"/>
+                     <widget class="QSpinBox" name="mWMSTileBufferSpinBox"/>
                     </item>
                    </layout>
                   </item>

@@ -772,7 +772,7 @@ namespace QgsWms
 
     if ( mContext.testFlag( QgsWmsRenderContext::UseTileBuffer ) )
     {
-      QRect rect( mContext.tiledBufferValue(), mContext.tiledBufferValue(), mContext.mapWidth(), mContext.mapHeight() );
+      QRect rect( mContext.tileBuffer(), mContext.tileBuffer(), mContext.mapWidth(), mContext.mapHeight() );
       image.reset( new QImage( image.get()->copy( rect ) ) );
     }
 
