@@ -982,12 +982,7 @@ namespace QgsWms
     mapSettings.setOutputDpi( paintDevice->logicalDpiX() );
 
     //map extent
-    QgsRectangle mapExtent = mWmsParameters.bboxAsRectangle();
-    if ( !mWmsParameters.bbox().isEmpty() && mapExtent.isEmpty() )
-    {
-      throw QgsBadRequestException( QgsServiceException::QGIS_InvalidParameterValue,
-                                    mWmsParameters[QgsWmsParameter::BBOX] );
-    }
+    QgsRectangle mapExtent = mContext.mapExtent();
 
     QString crs = mWmsParameters.crs();
     if ( crs.compare( "CRS:84", Qt::CaseInsensitive ) == 0 )

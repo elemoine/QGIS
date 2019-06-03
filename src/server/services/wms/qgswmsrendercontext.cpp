@@ -648,6 +648,28 @@ bool QgsWmsRenderContext::isValidWidthHeight() const
   return true;
 }
 
+QgsRectangle QgsWmsRenderContext::mapExtent() const
+{
+  QgsRectangle extent = mParameters.bboxAsRectangle();
+  if ( !mParameters.bbox().isEmpty() && extent.isEmpty() )
+  {
+    throw QgsBadRequestException( QgsServiceException::QGIS_InvalidParameterValue,
+                                  mParameters[QgsWmsParameter::BBOX] );
+  }
+  double extentWidth = extent.width();
+  double extentHeight = extent.height();
+  int width = mapWidth();
+  int height = mapHeight();
+  double resolutionX = extentWidth / width;
+  double resolutionY = extentHeight / height;
+  int tBuffer = mFlags & UseTileBuffer ? tileBuffer() : 0;
+  double xMin = extent.xMinimum() - tBuffer * resolutionX;
+  double yMin = extent.yMinimum() - tBuffer * resolutionY;
+  double xMax = extent.xMaximum() + tBuffer * resolutionX;
+  double yMax = extent.yMaximum() + tBuffer * resolutionY;
+  return QgsRectangle( xMin, yMin, xMax, yMax );
+}
+
 QSize QgsWmsRenderContext::mapSize( const bool aspectRatio ) const
 {
   int tBuffer = mFlags & UseTileBuffer ? tileBuffer() : 0;
@@ -659,12 +681,7 @@ QSize QgsWmsRenderContext::mapSize( const bool aspectRatio ) const
   if ( aspectRatio
        && mParameters.versionAsNumber() >= QgsProjectVersion( 1, 3, 0 ) )
   {
-    QgsRectangle extent = mParameters.bboxAsRectangle();
-    if ( !mParameters.bbox().isEmpty() && extent.isEmpty() )
-    {
-      throw QgsBadRequestException( QgsServiceException::QGIS_InvalidParameterValue,
-                                    mParameters[QgsWmsParameter::BBOX] );
-    }
+    QgsRectangle extent = mapExtent();
 
     QString crs = mParameters.crs();
     if ( crs.compare( "CRS:84", Qt::CaseInsensitive ) == 0 )

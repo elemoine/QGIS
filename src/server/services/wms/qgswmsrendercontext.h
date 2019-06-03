@@ -209,6 +209,12 @@ namespace QgsWms
       QMap<QString, QList<QgsMapLayer *> > layerGroups() const;
 
       /**
+       * Returns the extent of the map to render.
+       * \since QGIS 3.10
+       */
+      QgsRectangle mapExtent() const;
+
+      /**
        * Returns the size (in pixels) of the map to render, according to width
        * and height WMS parameters as well as the \a aspectRatio option.
        * \since QGIS 3.8
